@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -165,8 +167,11 @@ body {
 }
 
 .title-envelope {
+  font-family: sans-serif;
+  font-weight: 500;
+  font-style: normal;
   font-size: 24px;
-  font-family: cursive;
+  margin-top: 10px;
 }
 
 #wish {

@@ -1,5 +1,4 @@
 import { LetterBoxProps } from "@/types/component";
-import { InputHTMLAttributes } from "react";
 import Swal from "sweetalert2";
 
 export default function LetterBox(props: LetterBoxProps) {
@@ -29,12 +28,22 @@ export default function LetterBox(props: LetterBoxProps) {
           message: result.value.data,
         };
 
-        console.log(data);
+        const response = await fetch("/api", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const dataResponse = await response.json();
+        console.log(dataResponse);
+        
         // Contoh tindakan lainnya setelah form dikirim
         Swal.fire("Data Sent!", "", "success");
       }
     });
   }
+
   return (
     <div
       className={"letter box" + (isBoxOpen ? " show" : "")}
