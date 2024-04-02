@@ -1,7 +1,9 @@
 "use client";
+import { WrapperProps } from "@/types/component";
 import { useState } from "react";
 
-export default function Wrapper() {
+export default function Wrapper(props: WrapperProps) {
+  const { handleOpenBox } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -17,7 +19,16 @@ export default function Wrapper() {
       <div className="envelope"></div>
       <div className={"letter" + (isOpen ? " show" : "")} id="letter-envelope">
         <p className="title-envelope">Happy Birthday Raisya</p>
-        <a href="">See more</a>
+        <a
+          href=""
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleOpenBox();
+          }}
+        >
+          See more
+        </a>
       </div>
     </div>
   );

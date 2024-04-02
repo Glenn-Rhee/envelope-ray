@@ -4,12 +4,12 @@ import Wrapper from "@/components/Wrapper";
 import { useState } from "react";
 
 export default function Home() {
-  const [isBoxOpen, setIsBoxOpen] = useState(false)
-  
+  const [isBoxOpen, setIsBoxOpen] = useState(false);
+
   return (
     <>
-      <Wrapper />
-      <LetterBox />
+      <Wrapper handleOpenBox={() => setIsBoxOpen(!isBoxOpen)} />
+      <LetterBox isBoxOpen={isBoxOpen} handleOpenBox={setIsBoxOpen} />
     </>
   );
 }

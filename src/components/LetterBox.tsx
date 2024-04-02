@@ -1,6 +1,48 @@
-export default function LetterBox() {
+import { LetterBoxProps } from "@/types/component";
+import { InputHTMLAttributes } from "react";
+import Swal from "sweetalert2";
+
+export default function LetterBox(props: LetterBoxProps) {
+  const { isBoxOpen, handleOpenBox } = props;
+
+  function handelWish(e: any) {
+    e.preventDefault();
+    Swal.fire({
+      title: "Your wish",
+      html: '<textarea placeholder="Fill your wish here..." id="wish" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea> ',
+      focusConfirm: false,
+      preConfirm: () => {
+        const wish = Swal.getPopup()?.querySelector(
+          "#wish"
+        ) as HTMLInputElement;
+        const valueWish = wish.value;
+        if (!valueWish) {
+          Swal.showValidationMessage(`Please enter your wish!`);
+        }
+        return { data: valueWish };
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Di sini Anda dapat menggunakan data yang diisi dalam form
+        const data = {
+          name: "Raisya Ariana Asfriansah",
+          message: result.value.data,
+        };
+
+        console.log(data);
+        // Contoh tindakan lainnya setelah form dikirim
+        Swal.fire("Data Sent!", "", "success");
+      }
+    });
+  }
   return (
-    <div className="letter box">
+    <div
+      className={"letter box" + (isBoxOpen ? " show" : "")}
+      onClick={(e) => {
+        e.preventDefault();
+        handleOpenBox(false);
+      }}
+    >
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam
         delectus cum sint, similique impedit beatae quos laborum culpa aliquid
@@ -29,7 +71,9 @@ export default function LetterBox() {
         velit ipsa libero aliquam inventore facere excepturi consequuntur est
         odio.
       </p>
-      <button className="btn-wish">Make a wish</button>
+      <button className="btn-wish" onClick={handelWish}>
+        Make a wish
+      </button>
     </div>
   );
 }
