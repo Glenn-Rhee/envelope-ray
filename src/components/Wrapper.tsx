@@ -1,30 +1,27 @@
 "use client";
 import { WrapperProps } from "@/types/component";
-import { useState } from "react";
+import { useLetter } from "@/utils/state";
 
 export default function Wrapper(props: WrapperProps) {
-  const { handleOpenBox } = props;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isBoxOpen, setIsBoxOpen, isEnvelopeOpen, setIsEnvelopeOpen } =
+    useLetter();
 
   return (
-    <div
-      className="wrapper"
-      onClick={(e) => {
-        e.preventDefault();
-        setIsOpen(!isOpen);
-      }}
-    >
-      <div className={"lid one" + (isOpen ? " show" : "")}></div>
-      <div className={"lid two" + (isOpen ? " show" : "")}></div>
+    <div className="wrapper">
+      <div className={"lid one" + (isEnvelopeOpen ? " show" : "")}></div>
+      <div className={"lid two" + (isEnvelopeOpen ? " show" : "")}></div>
       <div className="envelope"></div>
-      <div className={"letter" + (isOpen ? " show" : "")} id="letter-envelope">
+      <div
+        className={"letter" + (isEnvelopeOpen ? " show" : "")}
+        id="letter-envelope"
+      >
         <p className="title-envelope">Happy Birthday Raisya</p>
         <a
           href=""
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            handleOpenBox();
+            setIsBoxOpen(!isBoxOpen);
           }}
         >
           See more

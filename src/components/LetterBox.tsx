@@ -1,12 +1,13 @@
 "use client";
 import { LetterBoxProps } from "@/types/component";
 import { msgs } from "@/utils/message";
+import { useLetter } from "@/utils/state";
 import { useState } from "react";
 import Swal, { SweetAlertResult } from "sweetalert2";
 
 export default function LetterBox(props: LetterBoxProps) {
-  const { isBoxOpen, handleOpenBox } = props;
   const [isSending, setIsSending] = useState<boolean>(false);
+  const { isBoxOpen, setIsBoxOpen } = useLetter();
 
   function handelWish(e: any) {
     e.preventDefault();
@@ -15,6 +16,9 @@ export default function LetterBox(props: LetterBoxProps) {
       title: "Message",
       html: '<textarea placeholder="Message here..." id="wish" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea> ',
       focusConfirm: false,
+      focusCancel: false,
+      confirmButtonText: "Kirim!",
+      showCloseButton: true,
       preConfirm: () => {
         const wish = (
           Swal.getPopup()?.querySelector("#wish") as HTMLInputElement
@@ -46,7 +50,7 @@ export default function LetterBox(props: LetterBoxProps) {
         });
         const dataResponse = await response.json();
         console.log(dataResponse);
-        setIsSending(false)
+        setIsSending(false);
 
         // Contoh tindakan lainnya setelah form dikirim
         Swal.fire(
@@ -58,13 +62,15 @@ export default function LetterBox(props: LetterBoxProps) {
     });
   }
 
+  function handleClose(e: any) {
+    e.preventDefault();
+    setIsBoxOpen(false);
+  }
+
   return (
     <div
       className={"letter box" + (isBoxOpen ? " show" : "")}
-      onClick={(e) => {
-        e.preventDefault();
-        handleOpenBox(false);
-      }}
+      onClick={handleClose}
     >
       {msgs.map((msg, i) => (
         <p key={i} className="msg">
@@ -85,6 +91,9 @@ export default function LetterBox(props: LetterBoxProps) {
         disabled={isSending}
       >
         Message
+      </button>
+      <button className="btn-close" onClick={handleClose}>
+        Close
       </button>
     </div>
   );

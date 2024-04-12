@@ -16,6 +16,48 @@ body {
   background-color: #E5DDC5;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  position: relative;
+}
+
+.app .btn-open {
+  display: block;
+  width: 100%;
+  padding: 10px 2px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #658ced;
+  transition: .2s;
+  border-radius: 18px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.btn-close {
+  display: block;
+  width: 100%;
+  padding: 10px 2px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: rgb(199, 54, 54);
+  transition: .2s;
+  border-radius: 18px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.btn-close:hover,
+.btn-close:active {
+  background-color: rgb(147, 39, 39);
+}
+
 .wrapper {
   height: 200px;
   width: 300px;
@@ -24,7 +66,6 @@ body {
   display: flex;
   justify-content: center;
   z-index: 0;
-  cursor: pointer;
 }
 
 .wrapper:active {
@@ -88,6 +129,8 @@ body {
 .letter.box {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   height: 80%;
   bottom: 0;
   margin: auto;
@@ -123,7 +166,8 @@ body {
   background-color: #293963;
 }
 
-.letter.box .btn-wish:hover {
+.letter.box .btn-wish:hover,
+.app .btn-open:hover {
   background-color: #3760C9;
 }
 
@@ -190,7 +234,6 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* align-items: center; */
   color: #3B4049;
   row-gap: 8px;
 }

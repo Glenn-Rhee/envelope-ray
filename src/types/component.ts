@@ -1,8 +1,3 @@
-export interface WrapperProps {
-  handleOpenBox: () => void;
-}
+export interface WrapperProps {}
 
-export interface LetterBoxProps {
-  isBoxOpen: boolean;
-  handleOpenBox: (params: boolean) => void;
-}
+export interface LetterBoxProps {}
