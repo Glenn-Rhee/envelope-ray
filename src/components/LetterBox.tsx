@@ -1,9 +1,12 @@
+"use client";
 import { LetterBoxProps } from "@/types/component";
 import { msgs } from "@/utils/message";
+import { useState } from "react";
 import Swal, { SweetAlertResult } from "sweetalert2";
 
 export default function LetterBox(props: LetterBoxProps) {
   const { isBoxOpen, handleOpenBox } = props;
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   function handelWish(e: any) {
     e.preventDefault();
@@ -27,6 +30,7 @@ export default function LetterBox(props: LetterBoxProps) {
       },
     }).then(async (result: SweetAlertResult<{ data: string }>) => {
       if (result.isConfirmed) {
+        setIsSending(true);
         // Di sini Anda dapat menggunakan data yang diisi dalam form
         const data = {
           name: "Raisya Ariana Asfriansah",
@@ -42,6 +46,7 @@ export default function LetterBox(props: LetterBoxProps) {
         });
         const dataResponse = await response.json();
         console.log(dataResponse);
+        setIsSending(false)
 
         // Contoh tindakan lainnya setelah form dikirim
         Swal.fire(
@@ -74,7 +79,11 @@ export default function LetterBox(props: LetterBoxProps) {
           <li>Raisya Cantik</li>
         </ul>
       </div>
-      <button className="btn-wish" onClick={handelWish}>
+      <button
+        className={`btn-wish ${isSending ? "disable" : ""}`}
+        onClick={handelWish}
+        disabled={isSending}
+      >
         Message
       </button>
     </div>

@@ -117,6 +117,12 @@ body {
   font-weight: 500;
 }
 
+.letter.box .btn-wish.disable,
+.letter.box .btn-wish.disable:hover {
+  cursor: no-drop;
+  background-color: #293963;
+}
+
 .letter.box .btn-wish:hover {
   background-color: #3760C9;
 }
