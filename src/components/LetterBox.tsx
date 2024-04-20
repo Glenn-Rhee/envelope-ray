@@ -2,11 +2,13 @@
 import { LetterBoxProps } from "@/types/component";
 import { msgs } from "@/utils/message";
 import { useLetter } from "@/utils/state";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal, { SweetAlertResult } from "sweetalert2";
 
 export default function LetterBox(props: LetterBoxProps) {
   const [isSending, setIsSending] = useState<boolean>(false);
+  const router = useRouter();
   const { isBoxOpen, setIsBoxOpen } = useLetter();
 
   function handelWish(e: any) {
@@ -52,12 +54,16 @@ export default function LetterBox(props: LetterBoxProps) {
         console.log(dataResponse);
         setIsSending(false);
 
-        // Contoh tindakan lainnya setelah form dikirim
-        Swal.fire(
-          "Pesann udaaa kekirimmm, makasi ya cantikkkk!!!",
-          "",
-          "success"
-        );
+        const { isConfirmed } = await Swal.fire({
+          title: "Thanks",
+          text: "Pesan udah kekirim makasi ya cantik. Aku punya sesuatu untuk kamu <3",
+          icon: "success",
+          confirmButtonText: "Yeay!",
+        });
+
+        if (isConfirmed) {
+          router.replace("https://flower-inky.vercel.app/");
+        }
       }
     });
   }
