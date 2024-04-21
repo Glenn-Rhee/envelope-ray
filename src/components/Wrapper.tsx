@@ -24,7 +24,7 @@ export default function Wrapper(props: WrapperProps) {
             setIsBoxOpen(!isBoxOpen);
           }}
         >
-          See more
+          Show more
         </a>
       </div>
     </div>

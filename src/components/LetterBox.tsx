@@ -56,14 +56,19 @@ export default function LetterBox(props: LetterBoxProps) {
 
         const { isConfirmed } = await Swal.fire({
           title: "Thanks",
-          text: "Pesan udah kekirim makasi ya cantik. Aku punya sesuatu untuk kamu <3",
+          text: "Pesan udah kekirim makasi ya cantik. Aku punya sesuatu untuk kamu, kamu mau liat?",
           icon: "success",
-          confirmButtonText: "Yeay!",
+          confirmButtonText: "Mau!",
+          showCancelButton: true,
+          cancelButtonText: "Engga bye",          
         });
 
         if (isConfirmed) {
           router.replace("https://flower-inky.vercel.app/");
+          return
         }
+
+        return
       }
     });
   }
